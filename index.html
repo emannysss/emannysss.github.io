@@ -3,72 +3,1002 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>ГБПОУ "СТЭТ им. космодрома Плесецк" - Главная страница</title>
+    <title>emannysss · Игры</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0B0C0E;
+            font-family: 'Inter', sans-serif;
+            color: #EFF3F8;
+            line-height: 1.4;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6EFF8E, #3B82F6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #FFFFFF 0%, #6EFF8E 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: #BDC5D4;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 32px 0 24px;
+            color: #6EFF8E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .page-sub {
+            color: #919AB0;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .games-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .game-item {
+            background: #0F1117;
+            border-radius: 28px;
+            border: 1px solid #242730;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .game-item:hover {
+            border-color: #3B82F6;
+        }
+
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .game-info {
+            flex: 2;
+            padding: 32px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .game-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .completed-badge {
+            background: rgba(110, 255, 142, 0.15);
+            color: #6EFF8E;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hours {
+            color: #919AB0;
+            font-size: 0.9rem;
+            margin: 12px 0 20px;
+        }
+
+        .game-description {
+            color: #C8D0E6;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .game-tag {
+            background: #1F253B;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .btn-modal {
+            background: #2E3A5C;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-modal:hover {
+            background: #3F4E78;
+        }
+
+        .game-image {
+            flex: 1;
+            min-width: 280px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+
+        .game-image img {
+            width: 100%;
+            max-width: 280px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .game-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #0F1117;
+            border-radius: 28px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid #3B82F6;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #242730;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: #0F1117;
+            z-index: 10;
+        }
+
+        .modal-header h3 {
+            font-size: 1.4rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #919AB0;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .media-item {
+            background: #1A1D26;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .media-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .media-item p {
+            padding: 12px;
+            font-size: 0.8rem;
+            color: #919AB0;
+            text-align: center;
+        }
+
+        .video-item {
+            background: #1A1D26;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .video-item:hover {
+            background: #252A38;
+        }
+
+        .video-item i {
+            font-size: 3rem;
+            color: #3B82F6;
+            margin-bottom: 12px;
+        }
+
+        .video-item p {
+            color: #C8D0E6;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #07080A;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #FFFFFF 0%, #6EFF8E 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: #919AB0;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            color: #919AB0;
+            font-size: 1.3rem;
+            transition: 0.2s;
+        }
+
+        .footer-social a:hover {
+            color: #6EFF8E;
+        }
+
+        .footer-column h4 {
+            color: #EFF3F8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #919AB0;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: #6EFF8E;
+        }
+
+        .footer-contacts li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #919AB0;
+            font-size: 0.9rem;
+        }
+
+        .footer-contacts li i {
+            width: 24px;
+            color: #6EFF8E;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+            text-align: center;
+            color: #656C86;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom p {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 780px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .game-container {
+                flex-direction: column;
+            }
+            .game-image {
+                order: -1;
+                justify-content: center;
+                padding-bottom: 0;
+            }
+            .game-image img {
+                max-width: 100%;
+                height: 200px;
+            }
+            .game-info {
+                padding: 24px;
+            }
+            .game-header h2 {
+                font-size: 1.4rem;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-contacts li {
+                justify-content: center;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div class="top-panel">
-        <div>
-            <img src="https://plesadm.ru/tinybrowser/files/banery/2025/po9xbd7t1odmipujda2hnvbsma1aoexhsbvge8ssey8takxmx4oknia5wtdhcck8iikxfuivkze-nearvoeur6wg.jpg">
-<h1>ГБПОУ "Северный техникум экономики и технологий им. космодрома «Плесецк»"</h1>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html" class="logo">⚡ emannysss</a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="services.html">Услуги</a>
+                <a href="contacts.html">Контакты</a>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+
+        <h1 class="page-title">Мои <span class="gradient-text">игры</span></h1>
+        <p class="page-sub">Мои достижения, часы и материалы по каждой игре</p>
+
+        <div class="games-list">
+            <!-- Игра 1: Minecraft -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Minecraft</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 20000+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('minecraft')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg" alt="Minecraft" onerror="this.src='https://placehold.co/400x200/1e3c2c/6EFF8E?text=Minecraft'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 2: Terraria -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Terraria</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 300+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('terraria')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.titotu.io/images/games/terraria-io-997x560.jpg" alt="Terraria" onerror="this.src='https://placehold.co/400x200/2a3a5c/6EFF8E?text=Elden+Ring'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 3: OMSI 2 -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>OMSI 2</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 5000+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('omsi2')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/252530/capsule_616x353.jpg?t=1757410180" alt="OMSI 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 4: Age of History II -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Age of History II</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 200+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('ageofhistoryii')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/603850/44cea4c564f8c42e995008027e772b330003c187/header.jpg?t=1763070471" alt="Age of History II" onerror="this.src='https://placehold.co/400x200/3a2a5c/6EFF8E?text=Witcher+3'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 5: Metro 2033 -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Metro 2033</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Пройдена</span>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 15+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('metro2033')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/metro_img4.jpg.webp" alt="Metro 2033" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 6: Metro: Last Light -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Metro: Last Light</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 6+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('metrolastlight')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/287390/header.jpg?t=1725444535" alt="Metro: Last Light" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 7: Call of War -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Call of War</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 260+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('callofwar')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.aptoide.com/imgs/d/8/8/d88f3bae79a6d864f30c007572097ad2_fgraphic.jpg" alt="Call of War" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 8: Crossout -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Crossout</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 26+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('crossout')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://image.api.playstation.com/vulcan/ap/rnd/202511/2011/eb7ab935eb4fc7800ad8dd28a56e7cdafece972fedfbc70c.jpg?w=440" alt="Crossout" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 9: Dead Frontier II -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Dead Frontier II</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 8+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('deadfrontierii')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://coop-land.ru/uploads/posts/2020-10/1601980774_1.jpg" alt="Dead Frontier II" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 10: Fallout 3 -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Fallout 3</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Пройдена</span>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 36+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('fallout3')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.gog-statics.com/ba4ee4cbc04910b91f58115d2dbb5a0fecb6819b7d8abe6176e6300e9200ca48.jpg" alt="Fallout 3" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 11: Fallout: New Vegas -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Fallout: New Vegas</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 1+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('falloutnewvegas')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/fallout-new-vegas-file-47147ffd.jpeg.webp" alt="Fallout: New Vegas" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 12: Fallout Shelter -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Fallout Shelter</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 60+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('falloutshelter')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.nintendo.com/eu/media/images/10_share_images/games_15/nintendo_switch_download_software_1/H2x1_NSwitchDS_FalloutShelter.jpg" alt="Fallout Shelter" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 13: FNaF World -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>FNaF World</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 5+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('fnafworld')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/ru/d/dc/Fnafworld2016.jpg" alt="FNaF World" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 14: REPO -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>R.E.P.O.</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 14+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('repo')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQMnAnJwctZCp3AxfHXWv0YQiB_n_nLD0bzpw&s" alt="R.E.P.O." onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 15: Shadow of Doubt -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Shadow of Doubt</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 5+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('shadowofdoubt')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/ru/0/01/Shadows_of_doubt_header.jpg?utm_source=ru.wikipedia.org&utm_campaign=index&utm_content=original" alt="Shadow of Doubt" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 16: STAR WARS: The Old Republic -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Star Wars: The Old Republic</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 23+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('starwarstheoldrepublic')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.squarespace-cdn.com/content/v1/5fbc4a62c2150e62cfcb09aa/b10d9326-50bd-43e0-9ccd-cfead35bf405/oldrepublic.jpg" alt="Star Wars: The Old Republic" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 17: Supermarket Together -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Supermarket Together</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 3+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('supermarkettogether')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://gfn.am/en/games/media/images/wide_art_image-supermarket-together-44058409.original.jpg" alt="Supermarket Together" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 18: Мир кораблей -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мир кораблей</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 30+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('worldcorables')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://mk-static-production.lesta.ru/portal/56360843/images/social.jpg" alt="Мир кораблей" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 19: Grand Theft Auto IV -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Grand Theft Auto IV</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 2+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('gta4')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/grand-theft-auto-iv-file-5172a0ab.jpeg.webp" alt="Grand Theft Auto IV" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 20: Hearts of Iron IV -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Hearts of Iron IV</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 50+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('hoi4')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.dlcompare.com/game_tetiere/upload/gameimage/file/16821.jpeg.webp" alt="Hearts of Iron IV" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 21: WorldBox -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>WorldBox</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 15+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('worldbox')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1206560/header.jpg" alt="WorldBox" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Игра 22: Dictators: No Peace -->
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Dictators: No Peace</h2>
+                        </div>
+                        <div class="hours"><i class="fas fa-clock"></i> 3+ часов наиграно</div>
+                        <button class="btn-modal" onclick="openModal('dictatorsnopeace')"><i class="fas fa-photo-video"></i> Посмотреть материалы</button>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://appmody.ru/uploads/posts/2020-05/1590475183_dictators-no-peace-1.png" alt="Dictators: No Peace" onerror="this.src='https://placehold.co/400x200/2a5c5c/6EFF8E?text=Hollow+Knight'">
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="sidebar">
-        <ul>
-            <li><a href="/">Главная</a></li>
-            <li><a href="/about">О нас</a></li>
-            <li><a href="/contacts">Контакты</a></li>
-        </ul>
-    </div>
-    <div class="content">
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
-        </div>
-        <div>
-            <h1>Главная страница</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quaerat.</p>
+
+    <!-- Модальное окно -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Материалы по игре</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Сюда подгружается контент -->
+            </div>
         </div>
     </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">⚡ emannysss</div>
+                    <p class="footer-desc">Обзоры, wiki и гайды по модам, плагинам и ресурспакам Minecraft.</p>
+                    <div class="footer-social">
+                        <a href="https://t.me/emannysss" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://vk.com/emannysss" target="_blank"><i class="fab fa-vk"></i></a>
+                        <a href="https://github.com/emannysss" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://boosty.to/emannysss" target="_blank"><i class="fas fa-crown"></i></a>
+                        <a href="mailto:emannysss@mc.hub" target="_blank"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="all-works.html">Все обзоры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Рубрики</h4>
+                    <ul>
+                        <li><a href="all-works.html?type=collections#resourcepacks">#ресурспаки</a></li>
+                        <li><a href="all-works.html?type=collections#mods">#моды</a></li>
+                        <li><a href="all-works.html?type=collections#plugins">#плагины</a></li>
+                        <li><a href="all-works.html?type=reviews">Все обзоры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul class="footer-contacts">
+                        <li><i class="fab fa-telegram"></i> <a href="https://t.me/emannysss">@emannysss</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:emannysss@mc.hub">emannysss@mc.hub</a></li>
+                        <li><i class="fab fa-discord"></i> <a href="#">emannysss</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 emannysss. Все права защищены.</p>
+                <p>Сайт создан с <i class="fas fa-heart" style="color: #6EFF8E;"></i> для Minecraft сообщества</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openModal(gameId) {
+            const modal = document.getElementById('gameModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            const gamesMedia = {
+                minecraft: {
+                    title: 'Minecraft — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/14346189/pexels-photo-14346189.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Скриншот"><p>Моя база</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/159621/thumb-up-like-success-powerful-159621.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Ферма"><p>Ферма незерита</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/295826/pexels-photo-295826.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Дракон"><p>Победа над драконом</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Обзор мода Create')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Обзор мода Create | 15 минут</p>
+                        </div>
+                    `
+                },
+                eldenring: {
+                    title: 'Elden Ring — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/16236999/pexels-photo-16236999/free-photo-of-elden-ring.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Маления"><p>Победа над Маленией</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/17072191/pexels-photo-17072191/free-photo-of-elden-ring-screenshot.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Финал"><p>Финальный босс</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Как победить Малению')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Как победить Малению | Гайд</p>
+                        </div>
+                    `
+                },
+                cyberpunk: {
+                    title: 'Cyberpunk 2077 — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/21110109/pexels-photo-21110109/free-photo-of-cyberpunk-2077-foto.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Найт-Сити"><p>Ночной город</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/21110112/pexels-photo-21110112/free-photo-of-cyberpunk-2077.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Персонаж"><p>Мой персонаж</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Секреты Найт-Сити')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Секреты Найт-Сити</p>
+                        </div>
+                    `
+                },
+                witcher: {
+                    title: 'The Witcher 3 — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/2770625/pexels-photo-2770625.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Туссент"><p>Туссент</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/2592597/pexels-photo-2592597.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Гвинт"><p>Коллекция гвинта</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Секреты Крови и Вина')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Секреты Крови и Вина</p>
+                        </div>
+                    `
+                },
+                hollowknight: {
+                    title: 'Hollow Knight — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/3169017/pexels-photo-3169017.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Pantheon"><p>Pantheon пройден</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/1420707/pexels-photo-1420707.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Гримм"><p>Битва с Гриммом</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Как пройти Pantheon of Hallownest')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Pantheon of Hallownest | Гайд</p>
+                        </div>
+                    `
+                }
+            };
+
+            const data = gamesMedia[gameId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+            }
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            modal.classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('gameModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
 </body>
 </html>
