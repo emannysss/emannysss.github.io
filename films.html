@@ -1,0 +1,2929 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>emannysss · Фильмы</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0B0C0E;
+            font-family: 'Inter', sans-serif;
+            color: #EFF3F8;
+            line-height: 1.4;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6EFF8E, #3B82F6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 28px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 28px 0 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #FFFFFF 0%, #6EFF8E 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: #BDC5D4;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: white;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 32px 0 24px;
+            color: #6EFF8E;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .page-sub {
+            color: #919AB0;
+            margin-bottom: 48px;
+            font-size: 1.1rem;
+        }
+
+        .games-list {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .game-item {
+            background: #0F1117;
+            border-radius: 28px;
+            border: 1px solid #242730;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .game-item:hover {
+            border-color: #3B82F6;
+        }
+
+        .game-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .game-info {
+            flex: 2;
+            padding: 32px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 8px;
+        }
+
+        .game-header h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .completed-badge {
+            background: rgba(110, 255, 142, 0.15);
+            color: #6EFF8E;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .progress-badge {
+            background: rgba(253, 255, 110, 0.15);
+            color: #f0ff6e;
+            padding: 6px 14px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .hours {
+            color: #919AB0;
+            font-size: 0.9rem;
+            margin: 12px 0 20px;
+        }
+
+        .game-description {
+            color: #C8D0E6;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .game-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .game-tag {
+            background: #1F253B;
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .btn-modal {
+            background: #2E3A5C;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-modal:hover {
+            background: #3F4E78;
+        }
+
+        .game-image {
+            flex: 1;
+            min-width: 280px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: flex-end;
+        }
+
+        .game-image img {
+            width: 100%;
+            max-width: 280px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: 0.2s;
+        }
+
+        .game-image img:hover {
+            transform: scale(1.02);
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.95);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #0F1117;
+            border-radius: 28px;
+            max-width: 900px;
+            width: 90%;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid #3B82F6;
+            position: relative;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #242730;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: #0F1117;
+            z-index: 10;
+        }
+
+        .modal-header h3 {
+            font-size: 1.4rem;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: #919AB0;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .modal-close:hover {
+            color: white;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .media-item {
+            background: #1A1D26;
+            border-radius: 16px;
+            overflow: hidden;
+            transition: 0.2s;
+        }
+
+        .media-item:hover {
+            transform: translateY(-4px);
+        }
+
+        .media-item img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+        }
+
+        .media-item p {
+            padding: 12px;
+            font-size: 0.8rem;
+            color: #919AB0;
+            text-align: center;
+        }
+
+        .video-item {
+            background: #1A1D26;
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .video-item:hover {
+            background: #252A38;
+        }
+
+        .video-item i {
+            font-size: 3rem;
+            color: #3B82F6;
+            margin-bottom: 12px;
+        }
+
+        .video-item p {
+            color: #C8D0E6;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background: #07080A;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 60px 0 30px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: linear-gradient(145deg, #FFFFFF 0%, #6EFF8E 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 16px;
+        }
+
+        .footer-desc {
+            color: #919AB0;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 16px;
+        }
+
+        .footer-social a {
+            color: #919AB0;
+            font-size: 1.3rem;
+            transition: 0.2s;
+        }
+
+        .footer-social a:hover {
+            color: #6EFF8E;
+        }
+
+        .footer-column h4 {
+            color: #EFF3F8;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column ul li a {
+            color: #919AB0;
+            text-decoration: none;
+            transition: 0.2s;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: #6EFF8E;
+        }
+
+        .footer-contacts li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #919AB0;
+            font-size: 0.9rem;
+        }
+
+        .footer-contacts li i {
+            width: 24px;
+            color: #6EFF8E;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 30px;
+            text-align: center;
+            color: #656C86;
+            font-size: 0.8rem;
+        }
+
+        .footer-bottom p {
+            margin: 8px 0;
+        }
+
+        @media (max-width: 780px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .game-container {
+                flex-direction: column;
+            }
+            .game-image {
+                order: -1;
+                justify-content: center;
+                padding-bottom: 0;
+            }
+            .game-image img {
+                max-width: 100%;
+                height: 200px;
+            }
+            .game-info {
+                padding: 24px;
+            }
+            .game-header h2 {
+                font-size: 1.4rem;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-social {
+                justify-content: center;
+            }
+            .footer-contacts li {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="index.html" class="logo">⚡ emannysss</a>
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="services.html">Услуги</a>
+                <a href="contacts.html">Контакты</a>
+            </div>
+        </div>
+
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+
+        <h1 class="page-title">Просмотренные мною <span class="gradient-text">фильмы, сериалы</span></h1>
+        <p class="page-sub">Вероятно не полный список просмотренного</p>
+
+        <div class="games-list">
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пираты Карибского моря: Проклятие чёрной жемчужины</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2003г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://mixnews.lv/wp-content/uploads/2020/11/17/2020-11-17-mixnews-piraty-karibskogo-morya-proklyatie-chernoy-zhemchuzhiny_0-768x415.jpg" alt="Пираты Карибского моря: Проклятие чёрной жемчужины" onerror="this.src='https://placehold.co/400x200/1e3c2c/6EFF8E?text=Minecraft'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пираты Карибского моря: Сундук мертвеца</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2006г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/ru/5/50/PiratesCD2.jpg?utm_source=ru.wikipedia.org&utm_campaign=index&utm_content=original" alt="Пираты Карибского моря: Сундук мертвеца" onerror="this.src='https://placehold.co/400x200/1e3c2c/6EFF8E?text=Minecraft'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пираты Карибского моря: На краю света</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2007г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/4774061/47e9d69b-41cb-4e26-8b40-ab7af410a3a9/x178" alt="Пираты Карибского моря: На краю света" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пираты Карибского моря: На странных берегах</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2011г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/6201401/5f317492-f9af-4216-bc46-f40c5cf5ef1c/x178" alt="Пираты Карибского моря: На странных берегах" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пираты Карибского моря: Мертвецы не рассказывают сказки</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://tv.rambler.ru/epg/pic/948785" alt="Пираты Карибского моря: Мертвецы не рассказывают сказки" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2007г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/ru/thumb/9/99/Transformers_album_cover.jpg/330px-Transformers_album_cover.jpg" alt="Трансформеры" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Месть падших</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2009г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.3dsociety.ru/sites/default/files/imagecache/1no_change/glav_optimus2.jpg" alt="Трансформеры: Месть падших" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Тёмная сторона луны</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2011г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://img.desktopwallpapers.ru/kino/pics/wide/1920x1200/09e824ddf59644c3669464d737d06977.jpg" alt="Трансформеры: Тёмная сторона луны" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Эпоха истребления</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2014г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://iv.okcdn.ru/i?r=BDFSTM1h2o92P_v-s8DgGlgYsA8OM4oTlVd_w3LeXR5il6Yp0awSVbaOM-Jy1Sb-s3w&fn=external_7" alt="Трансформеры: Эпоха истребления" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Последний рыцарь</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://itmag.pro/images/news/201705/e1cd758a46.jpg" alt="Трансформеры: Последний рыцарь" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Бамблби</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-ott/1534341/2a00000169c286e66a0d8fdad07184de38a3/672x378" alt="Бамблби" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Восхождение Звероботов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.soyuz.ru/public/uploads/files/5/7624646/1005x558_202306111544414f8a7b5eca.jpg" alt="Трансформеры: Восхождение Звероботов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Первое поколение</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (4 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1984г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBLdcPkpzfjRsBo6MT31qTcKngOmtzxWB5sA&s" alt="The Transformers: G1" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1986г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/movies/frames/The-Transformers-The-Movie-01.jpg" alt="Трансформеры" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Прайм</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (3 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2010г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://s.afisha.ru/mediastorage/58/b6/086ac84336ef4eebaeac9a98b658.jpg" alt="Трансформеры: Прайм" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Прайм. Восстание Предаконов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2013г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.karusel-tv.ru/media/suit/preview_full/media/image/2020/03/1584048808637351_24_13928100601.jpg" alt="Трансформеры: Прайм. Охотники на чудовищ. Восстание Предаконов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Анимейтед</h2>
+                            <span class="progress-badge"><i class="fas fa-spinner"></i> Недосмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (3 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2007г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://preview.redd.it/what-do-you-guys-think-about-transformers-animated-art-style-v0-m4y9lievi5sd1.jpeg?width=640&crop=smart&auto=webp&s=36c3113b7acfe2ff33d6369fe5b8dc30460bd063" alt="Трансформеры: Анимейтед" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Трансформеры: Трилогия о Войне за Кибертрон</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (3 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2020г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-image/1629390/799ecf7d-930a-4ac5-ac87-afc460fe4d66/x178" alt="Трансформеры: Трилогия о Войне за Кибертрон" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Доктор Хаус</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (8 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2004г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://cdn.subbota.tv/Show/PromoImage/sw3lv7aaxsjb.jpeg" alt="Доктор Хаус" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Игра престолов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (8 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2011г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToXkqcMv-mZY6zBr2M-Ui3-L1MbKIAWkrZug&s" alt="Игра престолов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Хороший доктор</h2>
+                            <span class="progress-badge"><i class="fas fa-spinner"></i> Недосмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (7 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://tvmag.ru/upload/iblock/138/_-_g_.jpg" alt="Хороший доктор" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Новичок</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (8 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://upload.wikimedia.org/wikipedia/ru/7/7d/The_rookie.jpg" alt="Новичок" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>911</h2>
+                            <span class="progress-badge"><i class="fas fa-spinner"></i> Недосмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (9 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_685x385/public/filefield_paths/9-1-1-season-3-trailer-1.jpg" alt="911" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пять минут тишины</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (1 сезон)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2016г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/filefield_paths/pyat-minut-tishiny-season-5-trailer-1.jpg" alt="Пять минут тишины" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Зима, весна, лето или осень</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2024г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/b268c9b1-1e49-47db-8daf-0e85d1585163?scale=1&quality=80" alt="Зима, весна, лето или осень" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Марсианин</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2015г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/5ca94cd0-c3dc-4f76-b26e-a88df0b92d9f?scale=1&quality=80" alt="Марсианин" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Наполеон</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun1-16.userapi.com/impg/oBs7Z3-eVWIKzkpbFERIOGOZtZwRovS7oFz3VQ/fzO_pEpFIxw.jpg?size=1280x720&quality=95&sign=60ea84e862eab6897d7e30d4bf8f4518&type=video_thumb" alt="Наполеон" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Адмирал</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (1 сезон)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2009г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-vthumb/902490/6f323a024c5f99973f7e45300209e689/800x450" alt="Адмирал" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Союз спасения</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://i.ytimg.com/vi/t_SZ_3bs81A/maxresdefault.jpg" alt="Союз спасения" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Железный человек</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2008г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://the-flow.ru/uploads/images/resize/830x0/adaptiveResize/13/80/83/38/87/b770e8440cd7.jpg" alt="Железный человек" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Железный человек 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2010г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/e7460fe9-61bb-4a98-b678-fa031c01bb81?scale=1&quality=80" alt="Железный человек 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Железный человек 3</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2013г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/c5185bd7-c935-4cb9-805f-7126c489bded?scale=1&quality=80" alt="Железный человек 3" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мстители</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2012г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://s1.afisha.ru/mediastorage/e9/b7/6467627ad18c47078e50c5aeb7e9.jpg" alt="Мстители" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мстители: Эра Альтрона</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2015г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/c1b1e5d0-434f-4c6b-80ec-c10767852581?scale=1&quality=80" alt="Мстители: Эра Альтрона" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мстители: Война бесконечности</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-kinopoisk-post-img/1101693/024e64f60c6f2f63db826275b23a0b81/960x540" alt="Мстители: Война бесконечности" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мстители: Финал</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/filefield_paths/avengersendgame.jpg" alt="Мстители: Финал" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пять ночей с Фредди</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_og_800x420/public/filefield_paths/five2.jpg" alt="Пять ночей с Фредди" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Впритык</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2010г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/f5f00b70-a7f2-42e6-bf7e-59e6211171ec" alt="Впритык" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Судья</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2014г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/f6e0370d-0596-47bf-8b79-2433b5d51228?scale=1&quality=80" alt="Судья" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Судья Дредд 3D</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2012г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://tv.rambler.ru/epg/pic/5825812" alt="Судья Дредд 3D" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дальнобойщики</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (3 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2001г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://tv.rambler.ru/epg/pic/6510502" alt="Дальнобойщики" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Удивительное путешествие доктора Дулиттла</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2020г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/9e14ba7e-0639-4595-b2c6-81c110e22b00?scale=1&quality=80" alt="Удивительное путешествие доктора Дулиттла" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Авеню 5</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (2 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2020г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://img.gazeta.ru/files3/996/12914996/upload-a5_2-pic905-895x505-23955.jpg" alt="Авеню 5" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1990г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/95ef6b9d-06f7-4f64-94af-13d91cf74847?scale=1&quality=80" alt="Дрожь земли" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли 2: Повторный удар</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1996г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-68.userapi.com/xibwjdT6ybj5qP7nPOAo6vLqnA6r77OmXnlOUg/ADGojb7GhlI.jpg" alt="Дрожь земли 2: Повторный удар" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли 3: Возвращение чудовищ</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2001г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/2c240cf8-4f3b-4f50-9e4c-df2bfbcde106?scale=1&quality=80" alt="Дрожь земли 3: Возвращение чудовищ" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли 4: Легенда начинается</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2004г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-72.userapi.com/qAaFw5kYxrLm_0RetvYn5F3gZv5j_F3BrGC6aA/EfHFaoN1tNM.jpg" alt="Дрожь земли 4: Легенда начинается" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли 5: Кровное родство</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2015г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/93181f1a-067f-4862-9597-7bfe54cb24c2?scale=1&quality=80" alt="Дрожь земли 5: Кровное родство" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли: Холодный день в аду</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun1-91.userapi.com/dSchEj8LITKJLuey6yCfAUjIKXd-p_lJuOiGYA/x4FHTEMczuM.jpg" alt="Дрожь земли: Холодный день в аду" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Дрожь земли: Остров крикунов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2020г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/b2725fa5-18c1-4f05-b540-465da1bfac98?scale=1&quality=80" alt="Дрожь земли: Остров крикунов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>1+1</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2012г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/ceb0560c-2fd8-469d-99da-47f164c49e2f?scale=1&quality=80" alt="1+1" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Ходячие мертвецы</h2>
+                            <span class="progress-badge"><i class="fas fa-spinner"></i> Недосмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (11 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2010г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/1968184a-9286-43fb-98dd-a1fe6fe86116" alt="Ходячие мертвецы" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Район №9</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2009г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/4c501593-8ac6-4f62-942a-27285497695d?scale=1&quality=80" alt="Район №9" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Ямато</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2005г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-46.userapi.com/s/v1/ig2/T1GoP7buifdzX7zetkUmu-94-rYQLdwMHd90UF7eGo-0UtsgN3S_hpZFjFExKoxDC-AxpTRcCIhuc7IAb-AcTRE4.jpg?quality=95&as=32x20,48x31,72x46,108x69,160x102,240x154,360x230,480x307,522x334&from=bu&u=lDVUFXX4EcnrdoU6STaemQgvujpFzZK5hU2g-aKxGr4&cs=522x0" alt="Ямато" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Воздух</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2015г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/8f338319-b961-4223-b3df-ec34488c5bb2?scale=1&quality=80" alt="Воздух" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Терминатор 2: Судный день</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1991г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-61.userapi.com/impg/GI8PlkWmSs7ZNALwqtCpQovx-vMLbrz7LFvJ3g/s6FM7iYJQfY.jpg?size=800x450&quality=95&keep_aspect_ratio=1&background=000000&sign=5ae0f3da941aa654dba6440d5829a399&type=video_thumb" alt="Терминатор 2: Судный день" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Терминатор: Тёмные судьбы</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/c7088dbir4ssllu0f350.jpg" alt="Терминатор: Тёмные судьбы" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Зелёная книга</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.interfax.ru/ftproot/textphotos/2019/01/25/zk700.jpg" alt="Зелёная книга" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Шрек</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2001г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/ct926o3ir4sqiatd9cs0.jpg" alt="Шрек" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Шрек 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2004г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/1aa40aca-27ed-4342-bb6d-5881cbb16a8c?scale=1&quality=80" alt="Шрек 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Шрек 3</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2007г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/fd1c8819-1d15-40f4-b5b3-8a29ad794884?scale=1&quality=80" alt="Шрек 3" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Шрек навсегда</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2010г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/330db094-dbcd-4260-be8b-5fa120612078?scale=1&quality=80" alt="Шрек навсегда" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Один дома</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1990г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/trailers_frame/821906e7f91154a4_0.jpg" alt="Один дома" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Один дома 2: Затерянный в Нью-Йорке</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1992г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.film.ru/sites/default/files/styles/thumb_1024x450/public/trailers_frame/home_alone_2-_lost_in_new_york.jpg" alt="Один дома 2: Затерянный в Нью-Йорке" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Такси</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1998г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/5cc2ff32-8001-4e3d-bec5-2ec0348a7d3a?scale=1&quality=80" alt="Такси" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Такси 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2000г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSerB3BkwS-ptkZWCiXUnNVJhJ0D7bF3Wvk0Q&s" alt="Такси 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Такси 3</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2003г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/501e7e72-e829-47c7-af91-58621be2dbab?scale=1&quality=80" alt="Такси 3" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Такси 4</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2007г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwoSvXFod7CKLG25A_d4hf6UG0kTaxVyPA-Q&s" alt="Такси 4" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод I: Скрытая угроза</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1999г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/c6tpuhjir4sslltsg280.jpg" alt="Звёздные войны. Эпизод I: Скрытая угроза" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод II: Атака клонов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2002г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/c6tpuhjir4sslltsg29g.jpg" alt="Звёздные войны. Эпизод II: Атака клонов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод III: Месть ситхов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2005г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-86.userapi.com/impg/QQs1R9yy-hK1MEYM8sx7kn8Tyt3NNsS8OO3seg/Mq2ydezyJB0.jpg?size=800x450&quality=95&keep_aspect_ratio=1&background=000000&sign=6fcfee3d557e7f8dea45e21e9c8ea27c&type=video_thumb" alt="Звёздные войны. Эпизод III: Месть ситхов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод IV: Новая надежда</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1977г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun1-25.userapi.com/A2pXX7B9u1L_fnPU_hQr6E8yaSbRKGH4hnIkoQ/52rv_6ch038.jpg" alt="Звёздные войны. Эпизод IV: Новая надежда" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод V: Империя наносит ответный удар</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1980г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://pic.rtbcdn.ru/video/2026-01-03/6c/68/6c684efc066e530d8d40f61becd91297.jpg" alt="Звёздные войны. Эпизод IV: Новая надежда" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод VI: Возвращение джедая</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1983г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/c6tpui3ir4sslltsg2fg.jpg" alt="Звёздные войны. Эпизод VI: Возвращение джедая" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод VII: Пробуждение силы</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2015г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/61f3db1d-f761-4db8-8e77-3f3e432e368c?scale=1&quality=80" alt="Звёздные войны. Эпизод VII: Пробуждение силы" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод VIII: Последние джедаи</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRytChZM12xv6ZXYT9ZglpfcB2Ag2q-zDCv9w&s" alt="Звёздные войны. Эпизод VIII: Последние джедаи" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны. Эпизод IX: Скайуокер. Восход</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-44.userapi.com/hth7joH_Gv670s-jldRd6pDN5u-WHYtGa5wV2Q/GSArtarMk2Q.jpg" alt="Звёздные войны. Эпизод IX: Скайуокер. Восход" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны: Войны клонов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2008г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-ott/1531675/2a0000016f378a2734bcead5bc59012f92b3/672x378" alt="Звёздные войны: Войны клонов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны: Оби-Ван Кеноби</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (1 сезон)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2020г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://irecommend.ru/sites/default/files/product-images/2145946/YDiMR1rI4WjUijvhDc1Lrw.png" alt="Звёздные войны: Оби-Ван Кеноби" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны: Асока</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (1 сезон)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://i.ytimg.com/vi/6LKAz8JoH1Q/maxresdefault.jpg" alt="Звёздные войны: Асока" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны: Войны клонов</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (7 сезонов)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2008г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/e027b506-5b20-4d9f-a735-b6488b62a084?scale=1&quality=80" alt="Звёздные войны: Войны клонов" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Звёздные войны: Повстанцы</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (4 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2014г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.mirf.ru/backend/wp-content/uploads/2016/06/d9a57d1ce208644ab6551d342f2292c7/x1200-y630.jpg" alt="Звёздные войны: Повстанцы" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Зверополис</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2016г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/539681db-b019-4740-8da7-f092cb18a759?scale=1&quality=80" alt="Зверополис" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Салют-7</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/d2701f64-4a18-4ad2-9aca-4c6b673e0799?scale=1&quality=80" alt="Салют-7" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Люди в чёрном</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 1997г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/df008f85-5797-46e4-b559-ca246bbde8fa?scale=1&quality=80" alt="Люди в чёрном" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Люди в чёрном 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2002г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/f2044075-0525-4df3-a604-5736182bd1a9" alt="Люди в чёрном 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Люди в чёрном 3</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2012г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/b530ee01-a67f-497c-9147-b868a9d408f8?scale=1&quality=80" alt="Люди в чёрном 3" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Глубоководный горизонт</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2016г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/b7b8c9ed-c7ed-407e-ae77-363b9703b248?scale=1&quality=80" alt="Глубоководный горизонт" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Поезд в Пусан</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2016г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/ee32d375-0303-4389-9524-1016dffd4b59?scale=1&quality=80" alt="Поезд в Пусан" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Поезд в Пусан 2: Полуостров</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2020г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://i.ytimg.com/vi/RQmf2j9z6rU/maxresdefault.jpg" alt="Поезд в Пусан 2: Полуостров" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Ущелье</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2025г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://deepa.ru/upload/iblock/8c0/v885gj1dbdwf15p4obqlvrxgiwfr31sy.jpg" alt="Ущелье" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Чёрный ящик</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2021г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/cauc4vrir4ssllu4jnk0.jpg" alt="Чёрный ящик" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Воздушный маршал</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2014г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/6737beff-bfda-4ccd-a76b-f00ee9105217?presetId=4000&width=1200&height=630&scale=1&quality=80" alt="Воздушный маршал" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Крушение</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-75.userapi.com/impg/JP-VisEvb1UGlKMKCovLzCTgoe--wmURo9Cm7A/cwrjysnztQg.jpg?size=1280x720&quality=95&sign=928c9a5721d1cbd55340af9f90b56237&type=video_thumb" alt="Крушение" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пила Х</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/36bd642a-9151-4503-a23b-6ee78b5c7f49" alt="Пила Х" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Оно</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://kinospoilers.ru/wp-content/uploads/2026/05/poster-182.jpg" alt="Оно" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Оно 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/e9320025-58a4-4219-aa74-dd0e040ff592?scale=1&quality=80" alt="Оно 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Оно: Добро пожаловать в Дерри</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (1 сезон)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2025г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://mes.kg/wp-content/uploads/2025/11/photo_2025-10-31_21-00-42.jpg" alt="Оно: Добро пожаловать в Дерри" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Добро пожаловать в Zомбилэнд</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2009г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://www.framerated.co.uk/wp-content/uploads/2024/10/zombieland01.jpg" alt="Добро пожаловать в Zомбилэнд" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Zомбилэнд: Контрольный выстрел</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://m.media-amazon.com/images/S/pv-target-images/6e54ef9d59d6616ecb38ee7543d652640781ab1089b3b5049dc35b97475e0ebc.jpg" alt="Zомбилэнд: Контрольный выстрел" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Винни-Пух: Кровь и мёд</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2023г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://i.ytimg.com/vi/C3Rn9Ksp4kU/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLA-46Ndk3HxciWG3t-UFCYr2Oqi2A" alt="Винни-Пух: Кровь и мёд" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Винни-Пух: Кровь и мёд 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2024г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/cb7e3318-2c43-4f17-aa56-b1cb8dc4e550?presetId=4000&width=1200&height=630&scale=1&quality=80" alt="Винни-Пух: Кровь и мёд 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Последний рубеж</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2013г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/7d4fb45e-dcd9-4e47-a6a2-0d38e05ad8c5?scale=1&quality=80" alt="Последний рубеж" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пассажир</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2018г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/67213064-e2fb-48f4-83e4-c7939901af07?scale=1&quality=80" alt="Пассажир" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Царство небесное</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2005г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/d61629c5-4c7e-45ee-813a-19fd48a7b5aa?scale=1&quality=80" alt="Царство небесное" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Туннель: Опасно для жизни</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/89c1c161-86e5-4ea1-9b05-fed583419dde?scale=1&quality=80" alt="Туннель: Опасно для жизни" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Схватка</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2011г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/790d6d5e-7f0e-4780-9e61-b510d3e1356c?scale=1&quality=80" alt="Схватка" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Заступник</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2021г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/b7eeb234-c067-4a83-a5ad-9289230d7b1a?scale=1&quality=80" alt="Заступник" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Ледяной драйв</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2021г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/630b50a5-3a46-4c5b-ada5-b22421a3d93a?scale=1&quality=80" alt="Ледяной драйв" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Ледяной драйв 2: Возмездие</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2025г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-vthumb/3129952/013635b14c23d0309bcafb4a89887231/orig" alt="Ледяной драйв 2: Возмездие" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Сайлент Хилл</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2006г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun1-20.userapi.com/impg/VyUHm7IhrspsTGm3JBUPfT1ZJSwJ7nJ-VCZPbQ/xwthI3fA3ZA.jpg?size=1280x720&quality=95&sign=50d9712c5c0d06ea1e0fb20155dd55f4&type=video_thumb" alt="Сайлент Хилл" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Сайлент Хилл 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2012г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-vthumb/760806/97f8ed725ca4931ef6fcf48778d9cfef/564x318_1" alt="Сайлент Хилл 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Сквозь снег</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2013г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/c6uekajir4sslltvujc0.jpg" alt="Сквозь снег" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мадагаскар</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2005г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/c164eae4-1356-4db2-bded-5a7d35e72770?scale=1&quality=80" alt="Мадагаскар" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мадагаскар 2</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2013г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://m.media-amazon.com/images/S/pv-target-images/a4f5797052ebbc44256760d0b0fd03bc1a90f2f5e62eadad5790ff82ac9ab65c.jpg" alt="Мадагаскар 2" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Мадагаскар 3</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2012г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun1-98.userapi.com/impg/iHC6G9SLgAxziyEeaHA6H7QcKwLImGCdzy1-fw/ND6bvd-9hO8.jpg?quality=90&proxy=1&sign=48e6e09381e5dfcf0ed5912449327ad5&type=video_thumb" alt="Мадагаскар 3" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Пингвины Мадагаскара</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2013г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/a4f785ff-d794-4c83-83e2-35dc3312f49d?scale=1&quality=80" alt="Пингвины Мадагаскара" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Чернобыль. Зона отчуждения</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Сериал (2 сезона)<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2014г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://tv.rambler.ru/epg/pic/1500660" alt="Чернобыль. Зона отчуждения" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Чернобыль. Зона отчуждения. Финал</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://uma-static.rtbcdn.ru/cwebp/pic/cardimage/bb/f6/bbf672a72c444bdfbce4d8948fe1941b.jpg?size=1828&quality=95" alt="Чернобыль. Зона отчуждения. Финал" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Притяжение</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2017г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/0747c439-63f9-4c87-9540-471b4fb97442?scale=1&quality=80" alt="Притяжение" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Зов Волка</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2019г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvpem8yvVgv1WW9qcvu0ovLgxQzSxqXRMcXw&s" alt="Зов Волка" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>В эфире</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2022г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/d971d36b-07a8-4922-9152-6eadbf3fd02a?scale=1&quality=80" alt="В эфире" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Финч</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2021г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://avatars.mds.yandex.net/get-vthumb/3418842/29fc554910079ff732168ae5cb168848/orig" alt="Финч" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Флешбэк</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2021г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://static.okko.tv/images/v4/f229a133-c003-4646-b3a4-ecffddb098ad?scale=1&quality=80" alt="Флешбэк" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>ВАЛЛ-И</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2008г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://images.iptv.rt.ru/images/c6tlg53ir4sslltr085g.jpg" alt="ВАЛЛ-И" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-item">
+                <div class="game-container">
+                    <div class="game-info">
+                        <div class="game-header">
+                            <h2>Эверест</h2>
+                            <span class="completed-badge"><i class="fas fa-check-circle"></i> Просмотрен</span>
+                        </div>
+                        <div class="hours">
+                            <i class="fa fa-television"></i> Тип: Фильм<br>
+                            <i class="fa fa-calendar"></i> Дата премьеры: 2015г
+                        </div>
+                    </div>
+                    <div class="game-image">
+                        <img src="https://sun9-15.userapi.com/impg/Niq4BB8PmV4tEDFruT48ToQb4D_vdueapQnlGA/JDsd4KkjciU.jpg?quality=90&proxy=1&sign=73d6c2d7689815aa10c70598172d3a53&type=video_thumb" alt="Эверест" onerror="this.src='https://placehold.co/400x200/4a2a3a/6EFF8E?text=Cyberpunk+2077'">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно -->
+    <div id="gameModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Материалы по игре</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Сюда подгружается контент -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <div class="footer-logo">⚡ emannysss</div>
+                    <p class="footer-desc">Обзоры, wiki и гайды по модам, плагинам и ресурспакам Minecraft.</p>
+                    <div class="footer-social">
+                        <a href="https://t.me/emannysss" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="https://vk.com/emannysss" target="_blank"><i class="fab fa-vk"></i></a>
+                        <a href="https://github.com/emannysss" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://boosty.to/emannysss" target="_blank"><i class="fas fa-crown"></i></a>
+                        <a href="mailto:emannysss@mc.hub" target="_blank"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>Навигация</h4>
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="services.html">Услуги</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="all-works.html">Все обзоры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Рубрики</h4>
+                    <ul>
+                        <li><a href="all-works.html?type=collections#resourcepacks">#ресурспаки</a></li>
+                        <li><a href="all-works.html?type=collections#mods">#моды</a></li>
+                        <li><a href="all-works.html?type=collections#plugins">#плагины</a></li>
+                        <li><a href="all-works.html?type=reviews">Все обзоры</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <ul class="footer-contacts">
+                        <li><i class="fab fa-telegram"></i> <a href="https://t.me/emannysss">@emannysss</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:emannysss@mc.hub">emannysss@mc.hub</a></li>
+                        <li><i class="fab fa-discord"></i> <a href="#">emannysss</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 emannysss. Все права защищены.</p>
+                <p>Сайт создан с <i class="fas fa-heart" style="color: #6EFF8E;"></i> для Minecraft сообщества</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function openModal(gameId) {
+            const modal = document.getElementById('gameModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+
+            const gamesMedia = {
+                minecraft: {
+                    title: 'Minecraft — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/14346189/pexels-photo-14346189.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Скриншот"><p>Моя база</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/159621/thumb-up-like-success-powerful-159621.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Ферма"><p>Ферма незерита</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/295826/pexels-photo-295826.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Дракон"><p>Победа над драконом</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Обзор мода Create')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Обзор мода Create | 15 минут</p>
+                        </div>
+                    `
+                },
+                eldenring: {
+                    title: 'Elden Ring — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/16236999/pexels-photo-16236999/free-photo-of-elden-ring.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Маления"><p>Победа над Маленией</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/17072191/pexels-photo-17072191/free-photo-of-elden-ring-screenshot.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Финал"><p>Финальный босс</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Как победить Малению')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Как победить Малению | Гайд</p>
+                        </div>
+                    `
+                },
+                cyberpunk: {
+                    title: 'Cyberpunk 2077 — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/21110109/pexels-photo-21110109/free-photo-of-cyberpunk-2077-foto.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Найт-Сити"><p>Ночной город</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/21110112/pexels-photo-21110112/free-photo-of-cyberpunk-2077.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Персонаж"><p>Мой персонаж</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Секреты Найт-Сити')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Секреты Найт-Сити</p>
+                        </div>
+                    `
+                },
+                witcher: {
+                    title: 'The Witcher 3 — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/2770625/pexels-photo-2770625.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Туссент"><p>Туссент</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/2592597/pexels-photo-2592597.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Гвинт"><p>Коллекция гвинта</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Секреты Крови и Вина')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Секреты Крови и Вина</p>
+                        </div>
+                    `
+                },
+                hollowknight: {
+                    title: 'Hollow Knight — скриншоты и видео',
+                    content: `
+                        <div class="media-grid">
+                            <div class="media-item"><img src="https://images.pexels.com/photos/3169017/pexels-photo-3169017.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Pantheon"><p>Pantheon пройден</p></div>
+                            <div class="media-item"><img src="https://images.pexels.com/photos/1420707/pexels-photo-1420707.jpeg?auto=compress&cs=tinysrgb&w=300" alt="Гримм"><p>Битва с Гриммом</p></div>
+                        </div>
+                        <div class="video-item" onclick="alert('Видео: Как пройти Pantheon of Hallownest')">
+                            <i class="fas fa-play-circle"></i>
+                            <p>▶ Pantheon of Hallownest | Гайд</p>
+                        </div>
+                    `
+                }
+            };
+
+            const data = gamesMedia[gameId];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+            }
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('gameModal');
+            modal.classList.remove('active');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('gameModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
